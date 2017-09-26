@@ -26,13 +26,13 @@ class Pecom extends Component
     /**
      * Calculating the cost of delivery
      * @param array $params
+     * @return array
      */
     public function calc(array $params)
     {
-        $params = http_build_query($params);
+        $p = http_build_query($params);
+        $data = file_get_contents('http://calc.pecom.ru/bitrix/components/pecom/calc/ajax.php?' . $p);
 
-        $data = file_get_contents('http://calc.pecom.ru/bitrix/components/pecom/calc/ajax.php?' . $params);
-
-
+        return json_decode($data, true);
     }
 }
